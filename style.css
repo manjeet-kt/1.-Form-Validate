@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+:root {
+    --successColor: #2e8314;
+    --errorColor: #c56944;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #6a7682;
+    font-family: 'open-sans', 'sans-serif';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+
+.container {
+    /* background-color: rgb(216, 221, 223); */
+    padding: 20px 40px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    border-radius: 5px;
+    background-color: #f0f0f0
+}
+
+form h2 {
+    text-align: center;
+}
+
+.form-control {
+    position: relative;
+    margin-bottom: 3vh;
+    align-items: center;
+}
+
+p.red {
+    color: red;
+    display: inline;
+}
+
+.form-control input {
+    /* background-color: rgb(206, 188, 170); */
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    margin-top: 0.5vh;
+    display: block;
+    width: 100%;
+    font-size: 15px;
+    padding: 10px;
+}
+
+.form-control label {
+    font-size: 20px;
+}
+
+.form-control small {
+
+    visibility: hidden;
+    color: var(--errorColor);
+}
+
+.form button {
+    border: 2px solid #51c5c5;
+    border-radius: 4px;
+    display: block;
+    cursor: pointer;
+    font-size: 20px;
+    width: 100%;
+    padding: 4px;
+    background-color: #51c5c5;
+}
+
+.form-control input:focus {
+    border-color: #b9b9b8;
+    outline: 0;
+}
+
+.form-control.success input {
+    border-color: var(--successColor);
+}
+
+.form-control.error input {
+    border-color: var(--errorColor);
+}
+
+.form-control.error small {
+    visibility: visible;
+    font-size: 14px;
+    font-weight: 600;
+}
