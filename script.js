@@ -1,4 +1,3 @@
-// console.log(`Check`);
 const form = document.querySelector(`#form`);
 const username = document.querySelector(`#username`);
 const email = document.querySelector(`#email`);
@@ -18,62 +17,93 @@ function showError(input, message) {
     errorMsg.innerText = message;
 }
 
-function isValidEmail(email) {
-    let checkEmail = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
-    return checkEmail.test(email);
+function InputID(input) {
+    return (input.id.charAt(0).toUpperCase() + input.id.slice(1));
 }
 
-//EvenListener 
+// Checking Field Entry
+function checkEntry(inputArr) {
+    inputArr.forEach(input => {
+        if (input.value == ``) {
+            showError(input, `${InputID(input)} is required`);
+        }
+        else {
+            showSuccess(input);
+            return true;
+        }
+    });
+}
+
+//Email Validation
+
+function isValidEmail(input) {
+    let checkEmail = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+    if ((input.value.length == 0)) {
+        showError(input, `${InputID(input)} is required`)
+    }
+    else if (checkEmail.test(input.value)) {
+        showSuccess(input)
+    }
+    else {
+        showError(input, `Invalid Email`);
+    }
+}
+
+//Password Validation
+
+function isValidPassword(input) {
+    let checkPassword = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
+    if ((input.value.length == 0)) {
+        showError(input, `${InputID(input)} is required`)
+    }
+    else if (checkPassword.test(input.value)) {
+        showSuccess(input);
+    }
+    else {
+
+        showError(input, `Invalid password`)
+    }
+}
+
+// Field Character Limit
+function fieldCharLimit(input, min, max) {
+    if ((input.value.length == 0)) {
+        showError(input, `${InputID(input)} is required`)
+    }
+    else if (input.value.length < min) {
+        showError(input, `${InputID(input)} must be greater than ${min} char`)
+    }
+    else if ((input.value.length > max)) {
+        showError(input, `${InputID(input)} can't be more than ${max} char`)
+    }
+    else {
+        showSuccess(input);
+    }
+
+}
+//Password Match
+function matchPassword(input1, input2) {
+    if ((input2.value.length == 0)) {
+        showError(input2, `${InputID(input2)} is required`)
+    }
+    else if (input1.value == input2.value) {
+        showSuccess(input2);
+    }
+    else {
+        showError(input2, `${InputID(password)} does not match`);
+    }
+}
+
+//EventListener 
 
 form.addEventListener(`submit`, function (e) {
     e.preventDefault();
-    // console.log(form);
-    // console.log(`submit`);
-    // console.log(username.value);
-    // console.log(email.value)
-    // console.log(password.value)
-    // console.log(password2.value)
+    // checkEntry(Enter new fields);
+    fieldCharLimit(username, 4, 12);
+    fieldCharLimit(password, 8, 16);
+    isValidEmail(email);
+    isValidPassword(password);
+    matchPassword(password, password2);
 
-    //Username
-    if (username.value === ``) {
-        showError(username, `Please enter a username`);
-    }
-    else { showSuccess(username) }
-
-
-    //email
-    if (email.value === ``) {
-        showError(email, `Please enter an email`);
-    }
-    else if (isValidEmail(email.value)) {
-        showSuccess(email);
-    }
-    else
-        showError(email, `Invalid Email`);
-
-
-    //password
-    if (password.value === ``) {
-        showError(password, `Please enter a password`);
-    }
-    else {
-        showSuccess(password);
-    }
-
-    //Confirm Password
-    if (password2.value == `` & password == ``) {
-        showError(password2, `Confirm your password`);
-    }
-    else {
-        showSuccess(password2);
-    }
-
-
-    //Password Match
-    if (password.value === password2.value & password2 !== ``) {
-        showSuccess(password2, `password matched`);
-    }
-    else {
-        showError(password2, `Password Did not match`);
-    }
 })
+
