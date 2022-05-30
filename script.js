@@ -27,12 +27,6 @@ function isValidEmail(email) {
 
 form.addEventListener(`submit`, function (e) {
     e.preventDefault();
-    // console.log(form);
-    // console.log(`submit`);
-    // console.log(username.value);
-    // console.log(email.value)
-    // console.log(password.value)
-    // console.log(password2.value)
 
     //Username
     if (username.value === ``) {
